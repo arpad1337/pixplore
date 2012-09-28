@@ -1,7 +1,5 @@
 <?php
 
-require_once "app.php";
-
 class Database
 {
 	public $specialQuery;
@@ -95,6 +93,33 @@ class Database
 	}
 }
 
-class DatabaseException extends AppException{}
+function parseData($array)
+{
+	foreach($array as $k => $v)
+	{
+		if(substr($v,0,1) == "[" || substr($v,0,1) == "{")
+		{
+			$array[$k] = json_decode($v);
+		}
+	}
+	return $array;
+}
+
+function parseMultipleData($array)
+{
+	foreach($array[0] as $k => $v)
+	{
+		if(substr($v,0,1) == "[" || substr($v,0,1) == "{")
+		{
+			$array[0][$k] = json_decode($v);
+			for( $i=1; $i<count($array) ; $i++)
+			{
+				$array[$i][$k] = json_decode($array[$i][$k]);
+			}
+		}
+	}
+	return $array;
+}
+
 
 ?>

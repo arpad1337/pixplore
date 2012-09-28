@@ -23,17 +23,18 @@
 
         <!-- Templates goes here -->
 
-        <scipt id="foo" type="x-template">
-
-
-
+        <script id="places-tmpl" class="tmpl" type="x-template">
+            // <ul id="places" class="thumbnails">
+            //     {{#each places}}
+            //         <li onClick="Feed.getPhotos({{id}})"><img src="{{cover_url}}" class="thumbnail" /><p>{{name}}</p></li>
+            //     {{/each}}
+            // </ul>
         </script>
 
         <!-- /Teamplates-->
 
     </head>
     <body>
-
         <div id="fb-root"></div>
         <script>
           window.fbAsyncInit = function() {
@@ -43,18 +44,13 @@
               cookie     : true, // enable cookies to allow the server to access the session
               xfbml      : true  // parse XFBML
             });
-
             // Additional initialization code here
+            App.redirectCheck();
           };
 
           // Load the SDK Asynchronously
-          (function(d){
-             var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-             if (d.getElementById(id)) {return;}
-             js = d.createElement('script'); js.id = id; js.async = true;
-             js.src = "//connect.facebook.net/en_US/all.js";
-             ref.parentNode.insertBefore(js, ref);
-           }(document));
+
+        
         </script>
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
@@ -62,16 +58,11 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="/explore.php">Pixplore</a>
+                    <a class="brand" href="explore.php">Pixplore</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li><a href="/explore.php">Explore</a></li>
-                            <li class="active"><a href="/feed.php">About</a></li>
+                            <li><a href="explore.php">Explore</a></li>
+                            <li class="active"><a href="feed.php">About</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -80,9 +71,18 @@
 
         <div class="container">
 
+            <div class="row">
+                <div id="places-container" class="span12">
+                    <ul id="places" class="thumbnails"></ul>
+                </div>
+            </div>
+
             <!-- Main hero unit for a primary marketing message or call to action -->
-            
-            bar:foo
+            <div class="row">
+                <div id="photo-container" class="span12">
+                    <ul id="photos" class="thumbnails"></ul>
+                </div>
+            </div>
 
             <hr>
 
@@ -94,10 +94,18 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.1.min.js"><\/script>')</script>
+        <script src="js/instajam.min.js"></script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/feed.js"></script>
+
+        <script>
+        $(document).ready(function(){
+            Feed.getPlaces();
+        });
+        </script>
     </body>
 </html>

@@ -1,9 +1,13 @@
 <?php
-require_once "map.php";
-require_once "feed.php";
-require_once "facebook.php";
-require_once "database.php";
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+require_once "core/map.php";
+require_once "core/feed.php";
+require_once "core/facebook.php";
+require_once "core/database.php";
+require_once "core/instagram.php";
 
 class App
 {
@@ -19,14 +23,23 @@ class App
 		$this->Database = new Database();
 		return true;
 	}
+	public function registerUserByAccessToken($access_token)
+	{
+		$this->Facebook->setAccessToken($access_token);
+		$userData = $this->Facebook->api('/me',array('id','name'));
+		$this->Database->insertQuery('users',array('id'=>$userData['id'],'name'=>$userData['name']));
+		return $userData['id'];
+	}
 }
 
 class AppException extends Exception
 {
 	public function getJsonObject()
 	{
-		return json_encode($this);
+		return json_decode($this);
 	}
 }
+
+class DatabaseException extends AppException{}
 
 ?>

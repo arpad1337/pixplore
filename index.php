@@ -25,8 +25,6 @@
 
         <scipt id="foo" type="x-template">
 
-
-
         </script>
 
         <!-- /Teamplates-->
@@ -43,18 +41,12 @@
 		      cookie     : true, // enable cookies to allow the server to access the session
 		      xfbml      : true  // parse XFBML
 		    });
-
 		    // Additional initialization code here
+            
 		  };
 
 		  // Load the SDK Asynchronously
-		  (function(d){
-		     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-		     if (d.getElementById(id)) {return;}
-		     js = d.createElement('script'); js.id = id; js.async = true;
-		     js.src = "//connect.facebook.net/en_US/all.js";
-		     ref.parentNode.insertBefore(js, ref);
-		   }(document));
+
 		</script>
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
@@ -62,12 +54,8 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="/explore.php">Pixplore</a>
+
+                    <a class="brand" href="explore.php">Pixplore</a>
                     
                 </div>
             </div>
@@ -75,9 +63,16 @@
 
         <div class="container">
 
-            <!-- Main hero unit for a primary marketing message or call to action -->
-            
-            bar:foo
+            <!-- Main h"ero unit for a primary marketing message or call to action -->
+			<div class="row">
+				<div class="span4">
+
+			        <button class="btn btn-primary btn-large" type="button" onclick="App.login()">
+			        	Login via Facebook
+			        </button>
+			    </div>
+			</div>
+
 
             <hr>
 

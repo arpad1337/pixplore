@@ -6,7 +6,7 @@
         <title>Pixplore</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-
+ <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             body {
@@ -43,18 +43,13 @@
               cookie     : true, // enable cookies to allow the server to access the session
               xfbml      : true  // parse XFBML
             });
-
+            App.redirectCheck();
+            Map.init();
             // Additional initialization code here
           };
 
           // Load the SDK Asynchronously
-          (function(d){
-             var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-             if (d.getElementById(id)) {return;}
-             js = d.createElement('script'); js.id = id; js.async = true;
-             js.src = "//connect.facebook.net/en_US/all.js";
-             ref.parentNode.insertBefore(js, ref);
-           }(document));
+
         </script>
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
@@ -67,11 +62,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="/explore.php">Pixplore</a>
+                    <a class="brand" href="explore.php">Pixplore</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active"><a href="/explore.php">Explore</a></li>
-                            <li><a href="/feed.php">About</a></li>
+                            <li class="active"><a href="explore.php">Explore</a></li>
+                            <li><a href="feed.php">About</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -82,7 +77,36 @@
 
             <!-- Main hero unit for a primary marketing message or call to action -->
             
-            bar:foo
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="span3">
+                    <button class="btn btn-primary btn-large" type="button" onclick="Map.showPlacesByPosition()">
+                        Get places by this position
+                    </button>
+                    </div>
+                    <div class="span3">
+                    <button class="btn btn-primary btn-large" type="button" onclick="Map.gotoCurrentPos()">
+                        Where am I
+                    </button>
+                    </div>
+                    <div class="span3">
+                        <div class="form-search">
+                          <input type="text" class="input-medium search-query" id="mapSearch">
+                          <button type="submit" class="btn" onclick="Map.search()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+              <div id="map" style="height:400px;width:100%;margin:10px 0;">
+
+                    </div>
+            </div>
+
+            <div class="row-fluid" id="images">
+                
+            </div>
 
             <hr>
 
@@ -94,10 +118,12 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.1.min.js"><\/script>')</script>
-
+        <script src="js/instajam.min.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/map.js"></script>
+        <script src="js/feed.js"></script>
     </body>
 </html>
